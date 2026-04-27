@@ -11,7 +11,7 @@ const news = [
 
 const LatesNews = () => {
     return (
-        <div className=" container mx-auto   py-4 px-2 text-gray-700 font-semibold bg-red-100 flex justify-between gap-4 items-center">
+        <div className=" rounded-md container mx-auto   py-4 px-2 text-gray-700 font-semibold bg-red-100 flex justify-between gap-4 items-center">
             <button className="text-white bg-red-400 btn">Breaking News</button>
             <Marquee pauseOnClick={true} pauseOnHover={true} speed={100}>
                 {

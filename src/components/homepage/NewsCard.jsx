@@ -1,19 +1,13 @@
-import { getNewsDetailsbyId } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowRight, FaRegBookmark } from "react-icons/fa";
+import { FaRegBookmark } from "react-icons/fa";
 import { IoShareSocial, IoStar } from "react-icons/io5";
 import { TiEye } from "react-icons/ti";
 
-const newsDetailspage = async ({params}) => {
-const {id} = await params;
-  //  console.log(id);
-    const news = await getNewsDetailsbyId(id)
-    
-    //console.log(news);
-
-    return (
-        <div className="max-w-4xl  mx-auto my-8">
+const NewsCard = ({ news }) => {
+  // console.log(news);
+  return (
+    <div className="container mx-auto my-8">
       <div className="card bg-base-100  shadow-sm">
         <div className="card-body">
             {/* author */}
@@ -59,27 +53,25 @@ const {id} = await params;
             className="w-full"
           />
         </figure>
-        <p >{news.details}</p>
+        <p className="line-clamp-4">{news.details}</p>
 
 
         <div className="flex justify-between items-center py-5">
             <div className="flex justify-center gap-2 items-center">
                 <h2  className="flex justify-center gap-2 items-center"> <IoStar className="text-lg text-yellow-500" />{news.rating.number}</h2>
-                <h2  className="flex justify-center gap-2 items-center"> <TiEye className="text-lg"/>{news.total_view}</h2>
+                <h2  className="flex justify-center gap-2 items-center"> <TiEye  className="text-lg"/>{news.total_view}</h2>
             </div>
 
-            
-        </div>
-        <div className="flex justify-end mt-5">
-                <Link href={`/category/${news.category_id}`}><button className="btn btn-primary w-full ">See Other News  <FaArrowRight /></button></Link>
+            <div>
+                <Link href={`/news/${news._id}`}><button className="btn text-red-400">See More</button></Link>
+                </div>
         </div>
          
         </div>
         
       </div>
     </div>
-    
-    );
+  );
 };
 
-export default newsDetailspage;
+export default NewsCard;

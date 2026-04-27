@@ -1,9 +1,15 @@
+"use"
 import Link from "next/link";
-import user from "@/asset/user.png"
+import Avatar from "@/asset/user.png"
 import Image from "next/image";
 import NavLink from "./NavLink";
+import { authClient } from "@/lib/auth-client";
 
 const Navbar = () => {
+    const { data: session } = authClient.useSession()
+    const user = session?.user;
+    console.log("user" , user);
+   
     return (
         <div className="flex justify-between container mx-auto mt-10 items-center ">
             <div></div>
@@ -13,14 +19,42 @@ const Navbar = () => {
                 <li><NavLink href="/carrer">Career</NavLink></li>
             </ul>
 
-            <div className="flex justify-center gap-4 items-center">
-                <Image  src={user} 
-                 width={50} 
-                height={50}
-                alt='logo'/>
+           {
+  user ? (
+    <div className="flex justify-center gap-4 items-center">
 
-                <button className="btn bg-purple-500 text-white">Login</button>
-            </div>
+  
+      <h2 className="font-semibold">{user?.name}</h2>
+
+      
+      <Image
+        src={user?.image || Avatar}
+        width={50}
+        height={50}
+        alt="user"
+        className="rounded-full"
+      />
+
+   
+      <button
+        onClick={() => authClient.signOut()} 
+        className="btn bg-red-500 text-white"
+      >
+        Logout
+      </button>
+
+    </div>
+  ) : (
+
+  
+    <Link href="/login">
+      <button className="btn bg-purple-500 text-white">
+        Login
+      </button>
+    </Link>
+
+  )
+}
 
             
         </div>
