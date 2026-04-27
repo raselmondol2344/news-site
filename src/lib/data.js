@@ -1,7 +1,7 @@
  export const getcatagory = async()=> {
   const res = await fetch ("https://openapi.programming-hero.com/api/news/categories")
   const data = await res.json();
-  return data.data;
+  return data.data;   
   
 }
  export const getNewsbyCatagoryId = async(category_id)=> {
